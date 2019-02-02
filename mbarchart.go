@@ -181,7 +181,7 @@ func (bc *MBarChart) Buffer() Buffer {
 				Fg: bc.TextColor,
 			}
 			y := bc.innerArea.Min.Y + bc.innerArea.Dy() - 1
-			x := bc.innerArea.Max.X + oftX + ((bc.BarWidth - len(bc.labels[i])) / 2) + k
+			x := bc.innerArea.Min.X + oftX + k
 			buf.Set(x, y, c)
 			k += w
 		}
