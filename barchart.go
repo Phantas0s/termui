@@ -19,22 +19,24 @@ import "fmt"
    bc.TextColor = termui.ColorGreen
    bc.BarColor = termui.ColorRed
    bc.NumColor = termui.ColorYellow
+   bc.EmptyNumColor = termui.ColorDefault
 */
 type BarChart struct {
 	Block
-	BarColor   Attribute
-	TextColor  Attribute
-	NumColor   Attribute
-	Data       []int
-	DataLabels []string
-	BarWidth   int
-	BarGap     int
-	CellChar   rune
-	labels     [][]rune
-	dataNum    [][]rune
-	numBar     int
-	scale      float64
-	max        int
+	BarColor      Attribute
+	TextColor     Attribute
+	NumColor      Attribute
+	EmptyNumColor Attribute
+	Data          []int
+	DataLabels    []string
+	BarWidth      int
+	BarGap        int
+	CellChar      rune
+	labels        [][]rune
+	dataNum       [][]rune
+	numBar        int
+	scale         float64
+	max           int
 }
 
 // NewBarChart returns a new *BarChart with current theme.
@@ -43,6 +45,7 @@ func NewBarChart() *BarChart {
 	bc.BarColor = ThemeAttr("barchart.bar.bg")
 	bc.NumColor = ThemeAttr("barchart.num.fg")
 	bc.TextColor = ThemeAttr("barchart.text.fg")
+	bc.EmptyNumColor = ThemeAttr("barchart.empty_num.fg")
 	bc.BarGap = 1
 	bc.BarWidth = 3
 	bc.CellChar = ' '
@@ -138,6 +141,7 @@ func (bc *BarChart) Buffer() Buffer {
 
 			if h == 0 {
 				c.Bg = bc.Bg
+				c.Fg = bc.EmptyNumColor
 			}
 			x := bc.innerArea.Min.X + oftX + (bc.BarWidth-len(bc.dataNum[i]))/2 + j
 			y := bc.innerArea.Min.Y + bc.innerArea.Dy() - 2
