@@ -173,7 +173,8 @@ func (table *Table) Buffer() Buffer {
 			}
 		}
 
-		if table.Separator {
+		// pass the last separator to not override the border of the block
+		if table.Separator && y != len(table.Rows)-1 {
 			border := DefaultTxBuilder.Build(strings.Repeat("─", table.Width-2), table.FgColor, table.BgColor)
 			for i, cell := range border {
 				buffer.Set(table.innerArea.Min.X+i, pointerY+1, cell)
