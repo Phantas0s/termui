@@ -24,27 +24,25 @@ import (
    bc.TextColor = termui.ColorGreen
    bc.BarColor = termui.ColorRed
    bc.NumColor = termui.ColorYellow
-   bc.EmptyNumColor = termui.ColorDefault
 */
 type MBarChart struct {
 	Block
-	BarColor      [NumberofColors]Attribute
-	TextColor     Attribute
-	NumColor      [NumberofColors]Attribute
-	EmptyNumColor Attribute
-	Data          [NumberofColors][]int
-	DataLabels    []string
-	BarWidth      int
-	BarGap        int
-	labels        [][]rune
-	dataNum       [NumberofColors][][]rune
-	numBar        int
-	scale         float64
-	max           int
-	minDataLen    int
-	numStack      int
-	ShowScale     bool
-	maxScale      []rune
+	BarColor   [NumberofColors]Attribute
+	TextColor  Attribute
+	NumColor   [NumberofColors]Attribute
+	Data       [NumberofColors][]int
+	DataLabels []string
+	BarWidth   int
+	BarGap     int
+	labels     [][]rune
+	dataNum    [NumberofColors][][]rune
+	numBar     int
+	scale      float64
+	max        int
+	minDataLen int
+	numStack   int
+	ShowScale  bool
+	maxScale   []rune
 }
 
 // NewBarChart returns a new *BarChart with current theme.
@@ -202,7 +200,6 @@ func (bc *MBarChart) Buffer() Buffer {
 				}
 				if h == 0 {
 					c.Bg = bc.Bg
-					c.Fg = bc.EmptyNumColor
 				}
 				x := bc.innerArea.Min.X + oftX + (bc.BarWidth-len(bc.dataNum[i1][i]))/2 + j
 				y := bc.innerArea.Min.Y + bc.innerArea.Dy() - 2 - ph
