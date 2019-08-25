@@ -17,6 +17,7 @@ type Par struct {
 	TextFgColor Attribute
 	TextBgColor Attribute
 	WrapLength  int // words wrap limit. Note it may not work properly with multi-width char
+	Multiline   bool
 }
 
 // NewPar returns a new *Par with given text as its content.
@@ -27,6 +28,7 @@ func NewPar(s string) *Par {
 		TextFgColor: ThemeAttr("par.text.fg"),
 		TextBgColor: ThemeAttr("par.text.bg"),
 		WrapLength:  0,
+		Multiline:   false,
 	}
 }
 
@@ -55,8 +57,23 @@ func (p *Par) Buffer() Buffer {
 			}
 
 			if y >= p.innerArea.Dy() {
-				n++
-				p.Height += 1
+
+				if p.Multiline == false {
+					buf.Set(
+						p.innerArea.Min.X+p.innerArea.Dx()-1,
+						p.innerArea.Min.Y+p.innerArea.Dy()-1,
+						Cell{Ch: '…', Fg: p.TextFgColor, Bg: p.TextBgColor},
+					)
+					break
+				} else {
+					buf.Set(
+						p.innerArea.Min.X+p.innerArea.Dx()-1,
+						p.innerArea.Min.Y+p.innerArea.Dy()-1,
+						Cell{Ch: ' ', Fg: p.TextFgColor, Bg: p.TextBgColor},
+					)
+					n++
+					p.Height += 1
+				}
 			}
 			continue
 		}
