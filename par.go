@@ -56,6 +56,7 @@ func (p *Par) Buffer() Buffer {
 
 			if y >= p.innerArea.Dy() {
 				n++
+				p.Height += 1
 			}
 			continue
 		}
