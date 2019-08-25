@@ -55,10 +55,7 @@ func (p *Par) Buffer() Buffer {
 			}
 
 			if y >= p.innerArea.Dy() {
-				buf.Set(p.innerArea.Min.X+p.innerArea.Dx()-1,
-					p.innerArea.Min.Y+p.innerArea.Dy()-1,
-					Cell{Ch: '…', Fg: p.TextFgColor, Bg: p.TextBgColor})
-				break
+				n++
 			}
 			continue
 		}

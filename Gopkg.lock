@@ -10,6 +10,17 @@
   version = "v1.1.0"
 
 [[projects]]
+  digest = "1:b733857fbb98685b1c5fe17ab05325130f32b573b865a1aca3a65645c6862566"
+  name = "github.com/gizak/termui"
+  packages = [
+    ".",
+    "debug",
+  ]
+  pruneopts = "UT"
+  revision = "bf53c5cbea3f372f745e1d8e4660e29f73d41517"
+  version = "v2.3.0"
+
+[[projects]]
   branch = "master"
   digest = "1:2eeeebccad4f052e6037527e86b8114c6bfd184a97f84d4449a5ea6ad202c216"
   name = "github.com/maruel/panicparse"
@@ -70,6 +81,8 @@
   analyzer-version = 1
   input-imports = [
     "github.com/davecgh/go-spew/spew",
+    "github.com/gizak/termui",
+    "github.com/gizak/termui/debug",
     "github.com/maruel/panicparse/stack",
     "github.com/mattn/go-runewidth",
     "github.com/mitchellh/go-wordwrap",
