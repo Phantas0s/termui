@@ -66,11 +66,6 @@ func (p *Par) Buffer() Buffer {
 					)
 					break
 				} else {
-					buf.Set(
-						p.innerArea.Min.X+p.innerArea.Dx()-1,
-						p.innerArea.Min.Y+p.innerArea.Dy()-1,
-						Cell{Ch: ' ', Fg: p.TextFgColor, Bg: p.TextBgColor},
-					)
 					n++
 					p.Height += 1
 				}
