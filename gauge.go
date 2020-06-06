@@ -25,7 +25,7 @@ const ColorUndef Attribute = Attribute(^uint16(0))
 
 type Gauge struct {
 	Block
-	Percent                 int
+	Percent                 float64
 	BarColor                Attribute
 	PercentColor            Attribute
 	PercentColorHighlighted Attribute
@@ -54,7 +54,7 @@ func (g *Gauge) Buffer() Buffer {
 	buf := g.Block.Buffer()
 
 	// plot bar
-	w := g.Percent * g.innerArea.Dx() / 100
+	w := int(g.Percent) * g.innerArea.Dx() / 100
 	for i := 0; i < g.innerArea.Dy(); i++ {
 		for j := 0; j < w; j++ {
 			c := Cell{}
@@ -68,7 +68,7 @@ func (g *Gauge) Buffer() Buffer {
 	}
 
 	// plot percentage
-	s := strings.Replace(g.Label, "{{percent}}", strconv.Itoa(g.Percent), -1)
+	s := strings.Replace(g.Label, "{{percent}}", strconv.FormatFloat(g.Percent, 'f', 2, strconv.IntSize), -1)
 	pry := g.innerArea.Min.Y + g.innerArea.Dy()/2
 	rs := str2runes(s)
 	var pos int
